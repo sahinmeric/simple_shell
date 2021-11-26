@@ -2,11 +2,9 @@
 
 
 /**
-* main - call the shell by Arturo and Juani
-* @ac: argument count
-* @av: argument vector
-* @en: external variable environment parsed by lines
-* Return: nothing
+* main - entry point of the shell
+*
+* Return: void
 */
 int main(void)
 {
