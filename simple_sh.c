@@ -12,10 +12,12 @@ int my_shell(void)
 	size_t characters;
 
 	buffer = malloc(bufsize * sizeof(char));
+	do {
 	printf("$");
 	characters = getline(&buffer, &bufsize, stdin);
 
 	printf("%lu characters were read.\n", characters);
 	printf("you typed: %s\n", buffer);
+	} while (1);
 	return (0);
 }
