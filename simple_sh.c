@@ -1,4 +1,13 @@
 #include "main.h"
+/**
+* sighandler- skkiped the ctrl signal
+* @signum: signal
+* Return: nothing
+*/
+void sighandler(int signum __attribute__((unused)))
+{
+	write(1, "\n$", 5);
+}
 
 /**
 * my_shell - execute a simple shell
@@ -12,6 +21,8 @@ int my_shell(void)
 	size_t characters;
 
 	buffer = malloc(bufsize * sizeof(char));
+
+/*	signal(SIGINT, sighandler); */
 	do {
 	printf("$");
 	characters = getline(&buffer, &bufsize, stdin);
