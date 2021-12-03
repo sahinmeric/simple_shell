@@ -1,5 +1,6 @@
 # simple_shell exercises
 another line
 another line
-nother line
+another line
+another line
 
