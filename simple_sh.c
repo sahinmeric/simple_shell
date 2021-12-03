@@ -14,21 +14,33 @@ void sighandler(int signum __attribute__((unused)))
 * Return: nothing
 */
 
-int my_shell(void)
+int my_shell(char **argv, char **env)
 {
 	char *buffer;
 	size_t bufsize = 32;
-	size_t characters;
+
+	char **pbuffer = &buffer;
+	size_t *pbufsize = &bufsize;
+	size_t input_len;
+	char *token;
 
 	buffer = malloc(bufsize * sizeof(char));
-
-/*	signal(SIGINT, sighandler); */
+/*	signal(SIGINT, sighandler); TODO it doesnt handle ctrl+D why?*/
 	do {
-	printf("$");
-	characters = getline(&buffer, &bufsize, stdin);
+	/*Interactive Shell prompt*/
+	write(1, "$", 1);
 
-	printf("%lu characters were read.\n", characters);
-	printf("you typed: %s\n", buffer);
+	/*Read*/
+	input_len = getline(pbuffer, pbufsize, stdin);
+
+	/*Tokenize */
+	token = strtok(buffer, "\n");
+
+	/*TODO Check path with stat,return 0 if successful if not -1*/
+
+	/*Execute*/
+	execute(token, argv, env);
+
 	} while (1);
 	return (0);
 }

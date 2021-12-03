@@ -5,8 +5,11 @@
 #include <stdlib.h>
 #include <signal.h>
 #include <unistd.h>
+#include <string.h>
+#include <sys/wait.h>
 
-int my_shell();
+int my_shell(char **argv, char **env);
 void sighandler(int);
+int execute(char *token, char *argv[], char *env[]);
 
 #endif /* MAIN_H */
