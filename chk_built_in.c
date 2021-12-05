@@ -1,5 +1,16 @@
 #include "main.h"
 
+/**TODO
+ *
+ *
+ *
+ */
+int _ext(char ***tokens, char **env)
+{
+	int status = 1; /*TODO pass status to this func*/
+	exit(status); /*and exit*/
+}
+
 /**
  *
  *
@@ -48,6 +59,7 @@ int chk_built_in(char ***tokens, char **env)
 	opr_t list[] = {
 		{"env", _env},
 		{"cd", _cd},
+		{"exit", _ext},
 		{NULL, NULL}
 	};
 	for (i = 0; list[i].op != NULL; i++)
