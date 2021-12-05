@@ -75,11 +75,9 @@ Non-interactive :
 
 ## Authors
  
-<a href="https://www.linkedin.com/in/sahinmeric/" target="_blank">  
+[Sahin](https://www.linkedin.com/in/sahinmeric/)
 
-Lucila
-
-<a href="https://www.linkedin.com/in/lucila-m-2b1518201/" target="_blank">  
+[Lucila](https://www.linkedin.com/in/lucila-m-2b1518201/ )
 
 ## License
 This simple_shell is under Apache license. 
