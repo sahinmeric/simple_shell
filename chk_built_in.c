@@ -6,9 +6,17 @@
  */
 int _env(char ***tokens, char **env)
 {
-	printf("env var found\n");
-	return (0);
+	int i, j;
 
+	for (i = 0; env[i] != NULL ; i++)
+		{
+			for (j = 0; env[i][j] != '\0'; j++)
+				; /*counting the length of each string*/
+
+				write(1, env[i], j); /*write the env variable and its value*/
+				write(1, "\n", 1); /*write new line*/
+		}
+	return (0);
 }
 
 
