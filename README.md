@@ -9,8 +9,23 @@
 
 ## Description
 
- Welcome for a simple_shell project  project for the end of the first tremeter at Holberton Schoolis a command interpreter that uses funtions and system calls to execute programs stored in the O.S.
-Standard C functions  and system calls employed for this simple_shell:
+Welcome to our `simple_shell` project for the end of the first tremeter at Holberton School!! 
+
+In a few words we can say that a Shell is a command interpreter that uses funtions and system calls to execute programs stored in the O.S.
+
+
+## Learning Objectives
+
+- [x] How does a shell work
+- [x] What is a pid and a ppid
+- [x] How to manipulate the environment of the current process
+- [x] What is the difference between a function and a system call
+- [x] How to create processes
+- [x] What are the three prototypes of main
+- [x] How does the shell use the PATH to find the programs
+- [x] How to execute another program with the execve system call
+- [x] How to suspend the execution of a process until one of its children terminates
+- [x] What is EOF / “end-of-file”?
 
 ## Contents
 
@@ -23,4 +38,19 @@ Standard C functions  and system calls employed for this simple_shell:
 | `parse.c` |  Other functions |
 | `execute.c` | Process id and execution files |
 | `read.c` | Other functions |
+
+## Compilation
+Your shell will be compiled this way:
+
+gcc -Wall -Werror -Wextra -pedantic -std=gnu89 *.c -o hsh
+
+## Testing modes 
+
+Interactive :
+
+![carbon (2) copy](https://user-images.githubusercontent.com/85719559/144756444-9dc4cd20-e0a5-4d32-86f2-7fb7338b07a3.png)
+
+Non-interactive :
+
+![carbon (2) non-intv copy](https://user-images.githubusercontent.com/85719559/144756628-ce5a0918-6359-440f-980d-fee6af4fbe2c.png)
 
