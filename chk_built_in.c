@@ -1,5 +1,21 @@
 #include "main.h"
+
 /**
+ *
+ *
+ *
+ */
+int _cd(char ***tokens, char **env)
+{
+	char *env_home = NULL;
+
+	env_home = getenv("HOME"); /*TODO wrote your own getenv*/
+/*	printf("home path is %s\n", env_home);*/
+	chdir(env_home);/*TODO error handle return 0 if success, if fail returns -1 with errno*/
+	return (0);
+}
+
+/**TODO
  *
  *
  *
@@ -19,10 +35,7 @@ int _env(char ***tokens, char **env)
 	return (0);
 }
 
-
-
-
-/**
+/**TODO
  *
  *
  *
@@ -34,6 +47,7 @@ int chk_built_in(char ***tokens, char **env)
 
 	opr_t list[] = {
 		{"env", _env},
+		{"cd", _cd},
 		{NULL, NULL}
 	};
 	for (i = 0; list[i].op != NULL; i++)
