@@ -73,6 +73,20 @@ Non-interactive :
 -   `gcc -Wall -Werror -Wextra -pedantic *.c -o hsh`
 -   `./hsh`
 
+## Examples 
+
+Exercise 2. Simple shell 0.1
+
+_Display a prompt and wait for the user to type a command. A command line always ends with a new line._
+
+![#cisfun$ julien@ubuntu:~/shell$mands](https://user-images.githubusercontent.com/85719559/144759801-03d4a0ea-8747-4521-bb2a-a60613eea2e1.png)
+
+Exercise  4. Simple shell 0.3
+
+_Handle the PATH and fork must not be called if the command doesn’t exist_
+
+![carbon (4) path and fork](https://user-images.githubusercontent.com/85719559/144760608-62fb9fe4-917f-427e-a343-1c59c556e4f9.png)
+
 ## Authors
  
 [Sahin](https://www.linkedin.com/in/sahinmeric/)
