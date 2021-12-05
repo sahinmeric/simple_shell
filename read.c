@@ -18,16 +18,17 @@ int tokenize(char **buffer, ssize_t read)
 		return (0);
 	}
 
-	for (i = 0; buffer[0][i] != '\0'; i++)
+	for (i = 0; buffer[0][i] != '\0'; i++) /*Copy buffer to bff*/
 		bff[i] = buffer[0][i];
 	bff[i] = buffer[0][i]; /*added null char at the end of bff*/
 
 	token = strtok(bff, delims);
-	for (i = 0; token != NULL; i++)
+	for (i = 0; token != NULL; i++) /*count the tokens*/
 		token = strtok(NULL, delims);
+
 	free(bff);
 	printf("token_count is %d\n", i);
-	return (i);
+	return (i); /*return token count*/
 }
 
 /*
