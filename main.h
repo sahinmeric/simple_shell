@@ -8,8 +8,10 @@
 #include <string.h>
 #include <sys/wait.h>
 
-int my_shell(char **argv, char **env);
 void sighandler(int);
-int execute(char *token, char *argv[], char *env[]);
+int my_shell(char **argv, char **env);
+int _read(char **buffer, int *len);
+void _parse(char **buffer, int *token_len, char ***tokens);
+int execute(char ***token, char *argv[], char *env[]);
 
 #endif /* MAIN_H */

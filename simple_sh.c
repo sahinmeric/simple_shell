@@ -1,46 +1,69 @@
 #include "main.h"
-/**
-* sighandler- skkiped the ctrl signal
+/** TODO
+* sighandler- handling signal
 * @signum: signal
 * Return: nothing
 */
 void sighandler(int signum __attribute__((unused)))
 {
-	write(1, "\n$", 5);
+	write(1, "\n$", 2);
 }
 
-/**
-* my_shell - execute a simple shell
-* Return: nothing
+/**TODO
+*
+*
 */
+void _set(char **buffer, int *read_status, char ***tokens)
+{
+	*buffer = NULL; /* so getline func can automatically allocate the memory.*/
+	read_status = 0;
+	*tokens = NULL;
+/*	printf("buffer and read_status set to 0");*/
+}
+/**TODO
+*
+*
+*/
+void _free(char **buffer, char ***tokens)
+{
+	free(*buffer);
+	free(*tokens);
+}
 
+/**TODO
+*
+*
+*/
 int my_shell(char **argv, char **env)
 {
 	char *buffer;
-	size_t bufsize = 32;
+	int read_status = 0;
+	int token_count;
+	char **tokens;
 
-	char **pbuffer = &buffer;
-	size_t *pbufsize = &bufsize;
-	size_t input_len;
-	char *token;
-
-	buffer = malloc(bufsize * sizeof(char));
 /*	signal(SIGINT, sighandler); TODO it doesnt handle ctrl+D why?*/
 	do {
-	/*Interactive Shell prompt*/
-	write(1, "$", 1);
+	/*Set to 0 or NULL*/
+	_set(&buffer, &read_status, &tokens);
+
+	/*Interactive Shell prompt*/ /*TODO isatty will be added as a condition It tells whether the file descriptor is connected to a terminal or not.*/
+	write(1, "$", 2);
 
 	/*Read*/
-	input_len = getline(pbuffer, pbufsize, stdin);
-
-	/*Tokenize */
-	token = strtok(buffer, "\n");
+	read_status = _read(&buffer, &token_count);
+	printf("read status is %d\n", read_status);
+	/*if read status == 2 it means getline failed, free(buffer)*/
+	if (read_status == 2)
+		free(buffer);
+	/*Parse*/
+	_parse(&buffer, &token_count, &tokens);
 
 	/*TODO Check path with stat,return 0 if successful if not -1*/
 
 	/*Execute*/
-	execute(token, argv, env);
-
+	execute(&tokens, argv, env);
+	/*Free*/
+	_free(&buffer, &tokens);
 	} while (1);
 	return (0);
 }

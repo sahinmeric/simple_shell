@@ -3,16 +3,17 @@
 /**
  * execute - process id and path execution
  * @argv: pointer to the filenames
- * @token: string of path
+ * @tokens: tokens
  * @env : pointer to shell variables
  * Return: always 1 to continue the loop
  */
 
 
-int execute(char *token, char *argv[], char *env[])
+int execute(char ***tokens, char *argv[], char *env[])
 {
 	pid_t child_pid;
 	int status;
+	char *cmd = **tokens;
 
 	child_pid = fork();
 	/* i'm the parent process */
@@ -23,13 +24,12 @@ int execute(char *token, char *argv[], char *env[])
 	} /* i'm the child process */
 	if (child_pid == 0)
 	{
-		execve(token, argv, env);
-		printf("Success\n");
+		execve(cmd, argv, env);
 		/*TODO handle error, when it returns -1 it means path not found and will return errno,print errno to screen in case of not existence of the path*/
 	}
 	else
 	{
-		wait(&status); /* TODO how status works?*/
+		wait(&status);
 	}
 	return (0);
 }
