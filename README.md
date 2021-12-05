@@ -27,14 +27,26 @@ In a few words we can say that a Shell is a command interpreter that uses funtio
 - [x] How to suspend the execution of a process until one of its children terminates
 - [x] What is EOF / “end-of-file”?
 
+
+## Project Requirements
+-   Allowed editors:  _vi_,  _vim_,  _emacs_
+-   All your files will be compiled on Ubuntu 14.04 LTS.
+-   Your programs and functions will be compiled with  _gcc 4.8.4_  using the flags  _-Wall -Werror -Wextra_  and  _-pedantic_
+-   All your files should end with a new line
+-   A  _README.md_  file, at the root of the folder of the project is mandatory
+-   Your code should use the  _Betty_  style. It will be checked using  _betty-style.pl_  and  _betty-doc.pl_
+-   No more than 5 functions per file.
+-   Your shell should not have any memory leaks.
+-   All your header files should be include guarded.
+-   Use system calls only when you need to.
 ## Contents
 
 
 | **Filename**  | **Description**          |
 | ------------- | ----------- |
 | `simple_sh.c` | Skeleton of our shell |
-| `main.h` |  Entry point of the shell |
-| `main.c` | Libreries used, main.h definition and prototypes of our functions |
+| `main.h` | Libreries used, main.h definition and prototypes of our functions |
+| `main.c` | Entry point of the shell |
 | `parse.c` |  Other functions |
 | `execute.c` | Process id and execution files |
 | `read.c` | Other functions |
@@ -42,7 +54,7 @@ In a few words we can say that a Shell is a command interpreter that uses funtio
 ## Compilation
 Your shell will be compiled this way:
 
-gcc -Wall -Werror -Wextra -pedantic -std=gnu89 *.c -o hsh
+`gcc -Wall -Werror -Wextra -pedantic -std=gnu89 *.c -o hsh`
 
 ## Testing modes 
 
@@ -53,4 +65,11 @@ Interactive :
 Non-interactive :
 
 ![carbon (2) non-intv copy](https://user-images.githubusercontent.com/85719559/144756628-ce5a0918-6359-440f-980d-fee6af4fbe2c.png)
+
+## Installation
+
+-   ` git clone://https://github.com/sahinmeric/simple_shell.git`
+-   `cd simple_shell`
+-   `gcc -Wall -Werror -Wextra -pedantic *.c -o hsh`
+-   `./hsh`
 
