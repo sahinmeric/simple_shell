@@ -1,6 +1,28 @@
 #include "main.h"
-/*TODO betty*/
-/**
+
+/**TODO
+ *
+ *
+ *
+ *
+ */
+int chk_cmd(char ***tokens, char **argv, char **env)
+{
+	/*Check if it is built in*/
+	chk_built_in(tokens, env);
+
+	/*Check if it has a path */
+
+	return (0);
+}
+
+
+
+
+
+
+
+/**TODO
  * execute - process id and path execution
  * @argv: pointer to the filenames
  * @tokens: tokens
@@ -15,19 +37,22 @@ int execute(char ***tokens, char *argv[], char *env[])
 	int status;
 	char *cmd = **tokens;
 
+	/*Check command before fork*/
+	chk_cmd(tokens, argv, env);
+
 	child_pid = fork();
-	/* i'm the parent process */
 	if (child_pid == -1)
 	{
 		perror("Error: failed process\n");
 		return (1);
-	} /* i'm the child process */
-	if (child_pid == 0)
+	}
+	if (child_pid == 0) /*if child_pid is == 0 it means it is child process and will execute this block*/
 	{
+		printf("cmd is : %s\n", cmd);
 		execve(cmd, argv, env);
 		/*TODO handle error, when it returns -1 it means path not found and will return errno,print errno to screen in case of not existence of the path*/
 	}
-	else
+	else /*Else block will be executed by parent process*/
 	{
 		wait(&status);
 	}
