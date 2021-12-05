@@ -73,3 +73,13 @@ Non-interactive :
 -   `gcc -Wall -Werror -Wextra -pedantic *.c -o hsh`
 -   `./hsh`
 
+## Authors
+ 
+<a href="https://www.linkedin.com/in/sahinmeric/" target="_blank">  
+
+Lucila
+
+<a href="https://www.linkedin.com/in/lucila-m-2b1518201/" target="_blank">  
+
+## License
+This simple_shell is under Apache license. 
