@@ -22,7 +22,7 @@ int _cd(char ***tokens, char **env)
 
 	env_home = getenv("HOME"); /*TODO wrote your own getenv*/ /*TODO how to handle cd parameters like cd /root/simple_shell ?*/
 	chdir(env_home);/*TODO error handle return 0 if success, if fail returns -1 with errno*/
-	return (0);
+	return (1);
 }
 
 /**TODO
@@ -42,7 +42,7 @@ int _env(char ***tokens, char **env)
 				write(1, env[i], j); /*write the env variable and its value*/
 				write(1, "\n", 1); /*write new line*/
 		}
-	return (0);
+	return (1);
 }
 
 /**TODO
