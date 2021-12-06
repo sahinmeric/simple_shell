@@ -20,8 +20,7 @@ int _cd(char ***tokens, char **env)
 {
 	char *env_home = NULL;
 
-	env_home = getenv("HOME"); /*TODO wrote your own getenv*/
-/*	printf("home path is %s\n", env_home);*/
+	env_home = getenv("HOME"); /*TODO wrote your own getenv*/ /*TODO how to handle cd parameters like cd /root/simple_shell ?*/
 	chdir(env_home);/*TODO error handle return 0 if success, if fail returns -1 with errno*/
 	return (0);
 }

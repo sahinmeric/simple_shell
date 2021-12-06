@@ -14,6 +14,7 @@ int _read(char **buffer, int *len);
 void _parse(char **buffer, int *token_len, char ***tokens);
 int execute(char ***token, char *argv[], char *env[]);
 int chk_built_in(char *** tokens, char **env);
+int add_path(char ***tokens, char **env);
 
 /**TODO
  *
@@ -25,5 +26,15 @@ typedef struct opr
 	char *op;
 	int (*func)(char ***tokens, char **env);
 }opr_t;
+
+/**TODO
+ *
+ *
+ */
+typedef struct path
+{
+	char *path;
+	struct path *next;	
+} path_node;
 
 #endif /* MAIN_H */
