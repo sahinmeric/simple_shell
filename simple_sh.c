@@ -60,8 +60,8 @@ int my_shell(char **argv, char **env)
 
 	/*TODO Check path with stat,return 0 if successful if not -1*/
 
-	/*Execute*/
-	execute(&tokens, argv, env);
+	/*check and execute*/
+	chk_cmd(&tokens, argv, env);
 	/*Free*/
 	_free(&buffer, &tokens);
 	} while (1);
