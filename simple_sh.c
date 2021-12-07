@@ -36,7 +36,7 @@ void _free(char **buffer, char ***tokens)
 */
 int my_shell(char **argv, char **env)
 {
-	char *buffer;
+	char *buffer; /*allocates a peace of memory in the heap & a memory address on the pointer*/
 	int read_status = 0;
 	int token_count;
 	char **tokens;
@@ -50,10 +50,10 @@ int my_shell(char **argv, char **env)
 	write(1, "$", 2);
 
 	/*Read*/
-	read_status = _read(&buffer, &token_count);
+	read_status = _read(&buffer, &token_count);/* figures the status of the read function & returns a values*/: 
 	printf("read status is %d\n", read_status);
 	/*if read status == 2 it means getline failed, free(buffer)*/
-	if (read_status == 2)
+	if (read_status == 2) 
 		free(buffer);
 	/*Parse*/
 	_parse(&buffer, &token_count, &tokens);
