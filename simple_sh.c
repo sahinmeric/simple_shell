@@ -1,6 +1,7 @@
 #include "main.h"
-/** TODO
-* sighandler- handling signal
+
+/**
+* sighandler- handling ctrl + c signal, write \n instead of killing the process
 * @signum: signal
 * Return: nothing
 */
@@ -9,20 +10,22 @@ void sighandler(int signum __attribute__((unused)))
 	write(1, "\n$", 2);
 }
 
-/**TODO
-*
-*
+/**
+* _set - sets some start values to NULL
+* @buffer: buffer
+* @tokens: tokens
 */
-void _set(char **buffer, int *read_status, char ***tokens)
+
+void _set(char **buffer, char ***tokens)
 {
 	*buffer = NULL; /* so getline func can automatically allocate the memory.*/
-	read_status = 0;
 	*tokens = NULL;
-/*	printf("buffer and read_status set to 0");*/
 }
-/**TODO
-*
-*
+
+/**
+* _free - deallocates allocated memories of passed args.
+* @buffer: buffer
+* @tokens: tokens
 */
 void _free(char **buffer, char ***tokens)
 {
@@ -30,9 +33,11 @@ void _free(char **buffer, char ***tokens)
 	free(*tokens);
 }
 
-/**TODO
-*
-*
+/**
+* my_shell - execute a simple shell
+* @argv: argument vectors
+* @env: environment vectors
+* Return: nothing
 */
 int my_shell(char **argv, char **env)
 {
@@ -41,29 +46,31 @@ int my_shell(char **argv, char **env)
 	int token_count;
 	char **tokens;
 
-/*	signal(SIGINT, sighandler); TODO it doesnt handle ctrl+D why?*/
+	signal(SIGINT, sighandler);
 	do {
-	/*Set to 0 or NULL*/
-	_set(&buffer, &read_status, &tokens);
+	_set(&buffer, &tokens);
 
-	/*Interactive Shell prompt*/ /*TODO isatty will be added as a condition It tells whether the file descriptor is connected to a terminal or not.*/
-	write(1, "$", 2);
+	/*Interactive Shell prompt*/
+	if (isatty(STDIN_FILENO)) /*test if the fildes is connected to the terminal*/
+		write(1, "$", 2);
 
 	/*Read*/
 	read_status = _read(&buffer, &token_count);
-	printf("read status is %d\n", read_status);
-	/*if read status == 2 it means getline failed, free(buffer)*/
+
+	if (read_status == 1)
+		continue;
+
 	if (read_status == 2)
-		free(buffer);
+		printf("read_status is %d\n", read_status);
 	/*Parse*/
 	_parse(&buffer, &token_count, &tokens);
 
-	/*TODO Check path with stat,return 0 if successful if not -1*/
-
-	/*check and execute*/
+	/*Check and execute the command*/
 	chk_cmd(&tokens, argv, env);
+
 	/*Free*/
 	_free(&buffer, &tokens);
+
 	} while (1);
 	return (0);
 }
