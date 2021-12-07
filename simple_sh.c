@@ -60,8 +60,6 @@ int my_shell(char **argv, char **env)
 	if (read_status == 1)
 		continue;
 
-	if (read_status == 2)
-		printf("read_status is %d\n", read_status);
 	/*Parse*/
 	_parse(&buffer, &token_count, &tokens);
 
