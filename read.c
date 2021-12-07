@@ -27,7 +27,6 @@ int tokenize(char **buffer, ssize_t read)
 		token = strtok(NULL, delims);
 
 	free(bff);
-	printf("token_count is %d\n", i);
 	return (i); /*return token count*/
 }
 
@@ -46,18 +45,25 @@ int _read(char **buffer, int *token_count)
 	char *bff;
 
 	read = getline(buffer, &bufsize, stdin);
-	if (read == -1) /*if getline fails*/
-		return (2);
+
+	if (read == -1)
+	{
+		free(*buffer);
+		write (1, "\n", 1);
+		exit(0);
+	}
 
 	bff = buffer[0];
-	for (i = 0; bff[i] == ' ' || bff[i] == '\t'; i++) /*check if the next char is a \n till you find space or tab and return (1) */
+	for (i = 0; bff[i] == ' ' || bff[i] == '\t'; i++) /*chk if the next char is a \n till you find space or tab and return (1) */
 	{
 		if (bff[i + 1] == '\n')
 			return (1);
 	}
-	/*new line*/
+	/*New line*/
 	if (bff[0] == '\n')
-		return (1);
+		{
+			return (1);
+		}
 
 	*token_count = tokenize(buffer, read);
 	return (0);

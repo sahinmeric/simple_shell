@@ -1,10 +1,10 @@
 #include "main.h"
 
 /**
-* _strcat - concats two strings. 
-* @dest: the variable to be joined with src
-* @src: the variable to be joined with dest
-* Return: a pointer to new dest
+* _strcat - concats two strings.
+* @dest: destination char pointer
+* @src: source char pointer
+* Return: a char pointer to destination
 */
 
 char *_strcat(char *dest, char *src)

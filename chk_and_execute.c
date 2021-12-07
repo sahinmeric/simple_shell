@@ -18,13 +18,11 @@ int chk_cmd(char ***tokens, char **argv, char **env)
 		/*Check if it has a path */
 		if (tkn == '/' || tkn == '.')
 		{
-			printf("command has path\n");/*what happens in this case ./a.out ?*/
 			execute(tokens, argv, env);
 			return (0);
 		}
 		else
 		{
-			printf("command doesn't have path\n");
 			/*Append path to cmd */
 			add_path(tokens, env);
 			/*Execute with path + cmd */
@@ -46,19 +44,22 @@ int chk_cmd(char ***tokens, char **argv, char **env)
 int execute(char ***tokens, char *argv[], char *env[])
 {
 	pid_t child_pid;
-	int status;
-	char *cmd = **tokens;
+	int status; /*we need for wait func*/
+	char *cmd = **tokens; /*a pointer to first byte of first token*/
 
 	child_pid = fork();
 	if (child_pid == -1)
 	{
-		perror("Error: failed process\n");
+		perror("Error: "); /*perror will add a string of occured error*/
 		return (1);
 	}
 	if (child_pid == 0) /*if child_pid is == 0 it means it is child process and will execute this block*/
 	{
-		printf("cmd is : %s\n", cmd);
-		execve(cmd, argv, env);
+		if (execve(cmd, argv, env) == -1)
+		{
+			free(cmd);
+			exit(0);
+		}
 		/*TODO handle error, when it returns -1 it means path not found and will return errno,print errno to screen in case of not existence of the path*/
 	}
 	else /*Else block will be executed by parent process*/

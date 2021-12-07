@@ -27,13 +27,8 @@ path_node *create_path_list(char *path, path_node **head)
 	}
 	aux->next = new_node;
 
-	printf("new node -> str is %s\n", new_node->path);
 	return (*head);
 }
-
-
-
-
 
 /**
  *
@@ -64,7 +59,6 @@ int add_path(char ***tokens, char **env)
 		/*add path to cmd*/
 		new_cmd = _strcat(path_n->path, "/");
 		new_cmd = _strcat(new_cmd, **tokens);
-		printf("new cmd is %s\n", new_cmd);
 		path_n = path_n->next;
 
 		/*check with stat if path + first_token exist*/
@@ -73,16 +67,12 @@ int add_path(char ***tokens, char **env)
 		{
 			**tokens = new_cmd;
 			return (0);
-			printf("path exist\n");
 		}
 		else
 		{
-			printf("path doesnt exist\n");
+			/*TODO path not found*/
 		}
 	}
-	/*if exists, first_token = path + cmd */
-
-	/*if doesn't exist command not found */
-
+	(void) env;
 	return (0);
 }

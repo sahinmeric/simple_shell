@@ -8,6 +8,8 @@
 int _ext(char ***tokens, char **env)
 {
 	int status = 1; /*TODO pass status to this func*/
+	(void) tokens;
+	(void) env;
 	exit(status); /*and exit*/
 }
 
@@ -19,6 +21,8 @@ int _ext(char ***tokens, char **env)
 int _cd(char ***tokens, char **env)
 {
 	char *env_home = NULL;
+	(void) tokens;
+	(void) env;
 
 	env_home = getenv("HOME"); /*TODO wrote your own getenv*/ /*TODO how to handle cd parameters like cd /root/simple_shell ?*/
 	chdir(env_home);/*TODO error handle return 0 if success, if fail returns -1 with errno*/
@@ -33,6 +37,8 @@ int _cd(char ***tokens, char **env)
 int _env(char ***tokens, char **env)
 {
 	int i, j;
+
+	(void) tokens;
 
 	for (i = 0; env[i] != NULL ; i++)
 		{

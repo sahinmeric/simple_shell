@@ -19,10 +19,10 @@ int chk_built_in(char *** tokens, char **env);
 int add_path(char ***tokens, char **env);
 char *_strcat(char *dest, char *src);
 
-/**TODO
- *
- *
- *
+/**
+ * struct opr - a struct that keeps two types of data, a str and a func pointer
+ * @op: the operation string that will be used to check builtins
+ * @func: a func pointer 
  */
 typedef struct opr
 {
@@ -30,9 +30,10 @@ typedef struct opr
 	int (*func)(char ***tokens, char **env);
 }opr_t;
 
-/**TODO
- *
- *
+/**
+ *struct path_node - singly linked list for path
+ *@path: string to save each path token
+ *@next: next node pointer
  */
 typedef struct path
 {
