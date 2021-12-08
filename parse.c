@@ -1,10 +1,10 @@
 #include "main.h"
 
-/** TODO
-* parse - splitting
+/**
+* _parse - parses buffer into tokens
 * @buffer: buffer
-* @tokens: token
-* @len: len of tokens
+* @tokens: pointer to token
+* @token_count: token count
 * Return: nothing
 */
 

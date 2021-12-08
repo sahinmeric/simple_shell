@@ -1,8 +1,10 @@
 #include "main.h"
+
 /**
- *
- *
- *
+ * create_path_list - creating singly linked list from path
+ * @path: path env value
+ * @head: head of list
+ * Return: head pointer
  */
 path_node *create_path_list(char *path, path_node **head)
 {
@@ -31,9 +33,10 @@ path_node *create_path_list(char *path, path_node **head)
 }
 
 /**
- *
- *
- *
+ * add_path - append path to the command
+ * @tokens: token pointer
+ * @env: pointer to env variables
+ * Return: return 0 if success
  */
 int add_path(char ***tokens, char **env)
 {
@@ -70,7 +73,7 @@ int add_path(char ***tokens, char **env)
 		}
 		else
 		{
-			/*TODO path not found*/
+			perror("Error :");
 		}
 	}
 	(void) env;

@@ -1,17 +1,19 @@
 #include "main.h"
+
 /**
- *TODO
- *
- *
+ * tokenize - tokenize input
+ * @buffer: buffer
+ * @read_count: the number of characters read
+ * Return: token count
  */
-int tokenize(char **buffer, ssize_t read)
+int tokenize(char **buffer, ssize_t read_count)
 {
 	const char delims[] = " \t\n";
 	char *token;
 	char *bff;
 	int i = 0;
 
-	bff = malloc(sizeof(char) * read + 1);
+	bff = malloc(sizeof(char) * read_count + 1);
 	if (bff == NULL)
 	{
 		perror("Error");
@@ -30,41 +32,41 @@ int tokenize(char **buffer, ssize_t read)
 	return (i); /*return token count*/
 }
 
-/*
- *TODO
- *
- *
- *
- *
+/**
+ * _read - reads the input with getline
+ * @buffer: buffer
+ * @token_count: token count
+ * Return: return 0 if success
  */
 int _read(char **buffer, int *token_count)
 {
 	size_t bufsize = 0;
-	ssize_t read;
+	ssize_t read_count;
 	int i;
 	char *bff;
 
-	read = getline(buffer, &bufsize, stdin);
+	read_count = getline(buffer, &bufsize, stdin);
 
-	if (read == -1)
+	if (read_count == -1)
 	{
 		free(*buffer);
-		write (1, "\n", 1);
+		write(1, "\n", 1);
 		exit(0);
 	}
 
 	bff = buffer[0];
-	for (i = 0; bff[i] == ' ' || bff[i] == '\t'; i++) /*chk if the next char is a \n till you find space or tab and return (1) */
+	/*chk if the next char is a \n if there is a space*/
+	for (i = 0; bff[i] == ' ' || bff[i] == '\t'; i++)
 	{
 		if (bff[i + 1] == '\n')
 			return (1);
 	}
 	/*New line*/
 	if (bff[0] == '\n')
-		{
-			return (1);
-		}
+	{
+		return (1);
+	}
 
-	*token_count = tokenize(buffer, read);
+	*token_count = tokenize(buffer, read_count);
 	return (0);
 }

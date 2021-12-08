@@ -1,10 +1,11 @@
 #include "main.h"
 
-/**TODO
- *
- *
- *
- *
+/**
+ * chk_cmd - checks the cmd if it is builtin, has path or not and calls execute
+ * @tokens: pointer to tokens
+ * @argv: argument vectors
+ * @env: pointer to env variables
+ * Return: 0 on success
  */
 int chk_cmd(char ***tokens, char **argv, char **env)
 {	int status_builtin;
@@ -32,12 +33,12 @@ int chk_cmd(char ***tokens, char **argv, char **env)
 	return (0);
 }
 
-/**TODO
+/**
  * execute - process id and path execution
- * @argv: pointer to the filenames
- * @tokens: tokens
- * @env : pointer to shell variables
- * Return: always 1 to continue the loop
+ * @argv: argument vectors
+ * @tokens: pointer to tokens
+ * @env : pointer to env variables
+ * Return: 0 on success
  */
 
 
@@ -53,14 +54,16 @@ int execute(char ***tokens, char *argv[], char *env[])
 		perror("Error: "); /*perror will add a string of occured error*/
 		return (1);
 	}
-	if (child_pid == 0) /*if child_pid is == 0 it means it is child process and will execute this block*/
+	/*if child_pid is == 0 it is child process and will execute this block*/
+	if (child_pid == 0)
 	{
 		if (execve(cmd, argv, env) == -1)
 		{
 			free(cmd);
 			exit(0);
 		}
-		/*TODO handle error, when it returns -1 it means path not found and will return errno,print errno to screen in case of not existence of the path*/
+		/*TODO handle error, when it returns -1 it means path not found */
+	       /*and will return errno,print errno if path doesnt exist*/
 	}
 	else /*Else block will be executed by parent process*/
 	{

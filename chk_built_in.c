@@ -1,22 +1,24 @@
 #include "main.h"
 
-/**TODO
- *
- *
- *
+/**
+ * _ext - exits the program
+ * @tokens: pointer to the tokens
+ * @env: pointer to env variables
+ * Return: nothing
  */
 int _ext(char ***tokens, char **env)
 {
-	int status = 1; /*TODO pass status to this func*/
+	int status = 1;
 	(void) tokens;
 	(void) env;
-	exit(status); /*and exit*/
+	exit(status);
 }
 
 /**
- *
- *
- *
+ * _cd - change directory to home or given path
+ * @tokens: pointer to the tokens
+ * @env: pointer to env variables
+ * Return: 1
  */
 int _cd(char ***tokens, char **env)
 {
@@ -24,15 +26,19 @@ int _cd(char ***tokens, char **env)
 	(void) tokens;
 	(void) env;
 
-	env_home = getenv("HOME"); /*TODO wrote your own getenv*/ /*TODO how to handle cd parameters like cd /root/simple_shell ?*/
-	chdir(env_home);/*TODO error handle return 0 if success, if fail returns -1 with errno*/
+	env_home = _getenv("HOME", env);
+	/*TODO wrote your own getenv*/
+	/*TODO how to handle cd parameters like cd /root/simple_shell ?*/
+	chdir(env_home);
+	/*TODO error handle return 0 if success, if fail returns -1 with errno*/
 	return (1);
 }
 
-/**TODO
- *
- *
- *
+/**
+ * _env - print env variables
+ * @tokens: pointer to the tokens
+ * @env: pointer to env variables
+ * Return: 0 on success
  */
 int _env(char ***tokens, char **env)
 {
@@ -42,20 +48,20 @@ int _env(char ***tokens, char **env)
 
 	for (i = 0; env[i] != NULL ; i++)
 		{
-			for (j = 0; env[i][j] != '\0'; j++)
-				; /*counting the length of each string*/
+		for (j = 0; env[i][j] != '\0'; j++)
+		; /*counting the length of each string*/
 
-				write(1, env[i], j); /*write the env variable and its value*/
-				write(1, "\n", 1); /*write new line*/
+		write(1, env[i], j); /*write the env variable and its value*/
+		write(1, "\n", 1); /*write new line*/
 		}
 	return (1);
 }
 
-/**TODO
- *
- *
- *
- *
+/**
+ * chk_built_in - checks if it is built in, if it is it calls relevant func
+ * @tokens: pointer to the tokens
+ * @env: pointer to env variables
+ * Return: 0 on success
  */
 int chk_built_in(char ***tokens, char **env)
 {

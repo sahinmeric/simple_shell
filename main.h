@@ -11,13 +11,14 @@
 
 void sighandler(int);
 int my_shell(char **argv, char **env);
-int _read(char **buffer, int *len);
-void _parse(char **buffer, int *token_len, char ***tokens);
+int _read(char **buffer, int *read_count);
+void _parse(char **buffer, int *token_count, char ***tokens);
 int chk_cmd(char ***token, char *argv[], char *env[]);
 int execute(char ***token, char *argv[], char *env[]);
 int chk_built_in(char *** tokens, char **env);
 int add_path(char ***tokens, char **env);
 char *_strcat(char *dest, char *src);
+char *_getenv(const char *var_env, char **env);
 
 /**
  * struct opr - a struct that keeps two types of data, a str and a func pointer
