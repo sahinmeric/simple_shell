@@ -71,10 +71,6 @@ int add_path(char ***tokens, char **env)
 			**tokens = new_cmd;
 			return (0);
 		}
-		else
-		{
-			perror("Error :");
-		}
 	}
 	(void) env;
 	return (0);

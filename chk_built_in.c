@@ -8,7 +8,7 @@
  */
 int _ext(char ***tokens, char **env)
 {
-	int status = 1;
+	int status = 0;
 	(void) tokens;
 	(void) env;
 	exit(status);
@@ -23,15 +23,23 @@ int _ext(char ***tokens, char **env)
 int _cd(char ***tokens, char **env)
 {
 	char *env_home = NULL;
+	char *env_pwd = NULL;
+	int chdir_status;
+
 	(void) tokens;
-	(void) env;
 
 	env_home = _getenv("HOME", env);
-	/*TODO wrote your own getenv*/
-	/*TODO how to handle cd parameters like cd /root/simple_shell ?*/
-	chdir(env_home);
-	/*TODO error handle return 0 if success, if fail returns -1 with errno*/
-	return (1);
+	env_pwd = _getenv("PWD", env);
+
+	if ((*tokens)[1] == NULL || _strcmp((*tokens)[1], "~") == 0 ||
+			_strcmp((*tokens)[1], "$HOME") == 0)
+	{
+		chdir_status = chdir(env_home);
+	}
+	if (strcmp((*tokens)[1], "-") == 0)
+		chdir_status = chdir(env_pwd);
+	chdir_status = chdir((*tokens)[1]);
+	return (chdir_status);
 }
 
 /**

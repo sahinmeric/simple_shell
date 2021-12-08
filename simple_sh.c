@@ -61,7 +61,7 @@ int my_shell(char **argv, char **env)
 		continue;
 
 	/*Parse*/
-	_parse(&buffer, &token_count, &tokens);
+	_parse(&buffer, &token_count, &tokens, &argv);
 
 	/*Check and execute the command*/
 	chk_cmd(&tokens, argv, env);
