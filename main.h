@@ -15,7 +15,7 @@ int _read(char **buffer, int *read_count);
 void _parse(char **buffer, int *token_count, char ***tokens);
 int chk_cmd(char ***token, char *argv[], char *env[]);
 int execute(char ***token, char *argv[], char *env[]);
-int chk_built_in(char *** tokens, char **env);
+int chk_built_in(char ***tokens, char **env);
 int add_path(char ***tokens, char **env);
 char *_strcat(char *dest, char *src);
 char *_getenv(const char *var_env, char **env);
@@ -23,13 +23,13 @@ char *_getenv(const char *var_env, char **env);
 /**
  * struct opr - a struct that keeps two types of data, a str and a func pointer
  * @op: the operation string that will be used to check builtins
- * @func: a func pointer 
+ * @func: a func pointer
  */
 typedef struct opr
 {
 	char *op;
 	int (*func)(char ***tokens, char **env);
-}opr_t;
+} opr_t;
 
 /**
  *struct path_node - singly linked list for path
@@ -39,7 +39,7 @@ typedef struct opr
 typedef struct path
 {
 	char *path;
-	struct path *next;	
+	struct path *next;
 } path_node;
 
 #endif /* MAIN_H */
