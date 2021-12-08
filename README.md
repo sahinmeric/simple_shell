@@ -9,7 +9,7 @@
 
 ## Description
 
-Welcome to our `simple_shell` project for the end of the first tremeter at Holberton School!! 
+Welcome to our `simple_shell` project for the end of the first tremeter at Holberton School!!
 
 In a few words we can say that a Shell is a command interpreter that uses funtions and system calls to execute programs stored in the O.S.
 
@@ -56,7 +56,7 @@ Your shell will be compiled this way:
 
 `gcc -Wall -Werror -Wextra -pedantic -std=gnu89 *.c -o hsh`
 
-## Testing modes 
+## Testing modes
 
 Interactive :
 
@@ -73,7 +73,7 @@ Non-interactive :
 -   `gcc -Wall -Werror -Wextra -pedantic *.c -o hsh`
 -   `./hsh`
 
-## Examples 
+## Examples
 
 Exercise 2. Simple shell 0.1
 
@@ -88,10 +88,10 @@ _Handle the PATH and fork must not be called if the command doesn’t exist_
 ![carbon (4) path and fork](https://user-images.githubusercontent.com/85719559/144760608-62fb9fe4-917f-427e-a343-1c59c556e4f9.png)
 
 ## Authors
- 
+
 [Sahin](https://www.linkedin.com/in/sahinmeric/)
 
 [Lucila](https://www.linkedin.com/in/lucila-m-2b1518201/ )
 
 ## License
-This simple_shell is under Apache license. 
+This simple_shell is under Apache license.
