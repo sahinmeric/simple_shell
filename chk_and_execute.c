@@ -9,25 +9,33 @@
  */
 int chk_cmd(char ***tokens, char **argv, char **env)
 {	int status_builtin;
-	char tkn = *tokens[0][0];
+	char *cmd = *tokens[0];
+	struct stat st;
 	/*Check if it is built in*/
-
 	status_builtin = chk_built_in(tokens, env);
 
 	if (status_builtin == 0) /* it means it is not builtin*/
 	{
-		/*Check if it has a path */
-		if (tkn == '/' || tkn == '.')
+		/*Check if it has a path and valid*/
+		if (cmd[0] == '/' || cmd[0] == '.')
 		{
-			execute(tokens, argv, env);
-			return (0);
+			stat(cmd, &st);
+			if ((st.st_mode & S_IFMT) == S_IFREG) /*exists*/
+			{
+				execute(tokens, argv, env);
+				return (0);
+			}
+			else
+			{
+				return (0);
+			}
 		}
 		else
 		{
-			/*Append path to cmd */
 			add_path(tokens, env);
-			/*Execute with path + cmd */
+			printf(" ");
 			execute(tokens, argv, env);
+			return (0);
 		}
 	}
 	return (0);

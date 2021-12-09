@@ -20,6 +20,7 @@ int add_path(char ***tokens, char **env);
 char *_strcat(char *dest, char *src);
 char *_getenv(const char *var_env, char **env);
 int _strcmp(char *s1, char *s2);
+char *_strdup(char *str);
 
 /**
  * struct opr - a struct that keeps two types of data, a str and a func pointer
@@ -42,5 +43,7 @@ typedef struct path
 	char *path;
 	struct path *next;
 } path_node;
+
+void free_list(path_node *path_n);
 
 #endif /* MAIN_H */

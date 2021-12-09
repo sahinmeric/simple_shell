@@ -14,12 +14,16 @@ void sighandler(int signum __attribute__((unused)))
 * _set - sets some start values to NULL
 * @buffer: buffer
 * @tokens: tokens
+* @read_status: read status
+* @token_count: token count
 */
 
-void _set(char **buffer, char ***tokens)
+void _set(char **buffer, char ***tokens, int *read_status, int *token_count)
 {
 	*buffer = NULL; /* so getline func can automatically allocate the memory.*/
 	*tokens = NULL;
+	*read_status = 0;
+	*token_count = 0;
 }
 
 /**
@@ -48,7 +52,7 @@ int my_shell(char **argv, char **env)
 
 	signal(SIGINT, sighandler);
 	do {
-	_set(&buffer, &tokens);
+	_set(&buffer, &tokens, &read_status, &token_count);
 
 	/*Interactive Shell prompt*/
 	if (isatty(STDIN_FILENO)) /*test if the fildes is connected to the terminal*/

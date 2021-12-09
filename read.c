@@ -49,7 +49,6 @@ int _read(char **buffer, int *token_count)
 
 	if (read_count == -1)
 	{
-		free(*buffer);
 		write(1, "\n", 1);
 		exit(0);
 	}

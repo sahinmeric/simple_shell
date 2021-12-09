@@ -11,6 +11,7 @@ int _ext(char ***tokens, char **env)
 	int status = 0;
 	(void) tokens;
 	(void) env;
+	/*free before exiting*/
 	exit(status);
 }
 
