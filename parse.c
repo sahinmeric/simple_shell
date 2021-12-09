@@ -25,9 +25,7 @@ void _parse(char **buffer, int *token_count, char ***tokens, char ***argv)
 	for (i = 0; token != NULL; i++)
 	{
 		(*tokens)[i] = token; /* set tokens[i] to current token*/
-/*		(*argv)[i + 1] = token;*/
 		token = strtok(NULL, delim); /*set current token to next token*/
-/*		printf("argv[%d] is  %s\n", (i + 1), (*argv)[i + 1]);*/
 	}
 	(*tokens)[i] = token; /*set last token to null*/
 	(void) argv;

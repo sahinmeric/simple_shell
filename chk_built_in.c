@@ -37,7 +37,7 @@ int _cd(char ***tokens, char **env)
 	{
 		chdir_status = chdir(env_home);
 	}
-	if (strcmp((*tokens)[1], "-") == 0)
+	if (_strcmp((*tokens)[1], "-") == 0)
 		chdir_status = chdir(env_pwd);
 	chdir_status = chdir((*tokens)[1]);
 	return (chdir_status);
@@ -84,7 +84,7 @@ int chk_built_in(char ***tokens, char **env)
 	};
 	for (i = 0; list[i].op != NULL; i++)
 	{
-		if (strcmp((*tokens)[0], list[i].op) == 0)
+		if (_strcmp((*tokens)[0], list[i].op) == 0)
 			return (list[i].func(tokens, env));
 	}
 	return (0);

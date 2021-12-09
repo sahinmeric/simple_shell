@@ -29,7 +29,7 @@ path_node *create_path_list(char *path, path_node **head)
 	}
 	aux->next = new_node;
 
-/*	free(s);*/
+	free(s);
 	return (*head);
 }
 
@@ -61,8 +61,8 @@ int add_path(char ***tokens, char **env)
 
 	while (path_n != NULL)
 	{
-		new_cmd = strcat(path_n->path, "/");
-		new_cmd = strcat(new_cmd, **tokens);
+		new_cmd = _strcat(path_n->path, "/");
+		new_cmd = _strcat(new_cmd, **tokens);
 		path_n = path_n->next;
 
 		stat(new_cmd, &st);
@@ -72,7 +72,7 @@ int add_path(char ***tokens, char **env)
 			return (0);
 		}
 	}
-/*	free_list(path_n);*/
+	free_list(path_n);
 	return (0);
 }
 
