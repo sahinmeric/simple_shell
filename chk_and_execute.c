@@ -33,7 +33,7 @@ int chk_cmd(char ***tokens, char **argv, char **env)
 		else
 		{
 			add_path(tokens, env);
-			printf(" ");
+
 			execute(tokens, argv, env);
 			return (0);
 		}
