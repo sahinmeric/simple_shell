@@ -2,7 +2,7 @@
 
 /**
 * sighandler- handling ctrl + c signal, write \n instead of killing the process
-* @signum: signal
+* @signum: signal--
 * Return: nothing
 */
 void sighandler(int signum __attribute__((unused)))

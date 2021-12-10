@@ -1,7 +1,7 @@
 #include "main.h"
 
 /**
-* _ext - exits the program
+* _ext - exits the program.
 * @tokens: pointer to the tokens
 * @env: pointer to env variables
 * Return: nothing

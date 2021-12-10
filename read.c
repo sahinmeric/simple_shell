@@ -1,7 +1,7 @@
 #include "main.h"
 
 /**
- * _read - reads the input with getline
+ * _read - reads the input with getline.
  * @buffer: pointer to *buffer
  * Return: return 0 if success
  */

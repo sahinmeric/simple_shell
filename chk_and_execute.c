@@ -2,7 +2,7 @@
 
 /**
 * chk_cmd - checks the cmd if it is builtin, has path or not and calls execute
-* @tokens: pointer to tokens
+* @tokens: pointer to tokens.
 * @argv: argument vectors
 * @env: pointer to env variables
 * Return: 0 on success

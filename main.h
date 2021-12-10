@@ -26,7 +26,7 @@ char *_strcpy(char *dest, char *src);
 /**
  * struct opr - a struct that keeps two types of data, a str and a func pointer
  * @op: the operation string that will be used to check builtins
- * @func: a func pointer
+ * @func: a func pointer.
  */
 typedef struct opr
 {
