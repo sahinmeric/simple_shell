@@ -1,16 +1,18 @@
 #include "main.h"
 
 /**
- * chk_cmd - checks the cmd if it is builtin, has path or not and calls execute
- * @tokens: pointer to tokens
- * @argv: argument vectors
- * @env: pointer to env variables
- * Return: 0 on success
- */
+* chk_cmd - checks the cmd if it is builtin, has path or not and calls execute
+* @tokens: pointer to tokens
+* @argv: argument vectors
+* @env: pointer to env variables
+* Return: 0 on success
+*/
 int chk_cmd(char ***tokens, char **argv, char **env)
-{	int status_builtin;
+{
+	int status_builtin;
 	char *cmd = *tokens[0];
 	struct stat st;
+
 	/*Check if it is built in*/
 	status_builtin = chk_built_in(tokens, env);
 
@@ -26,14 +28,13 @@ int chk_cmd(char ***tokens, char **argv, char **env)
 				return (0);
 			}
 			else
-			{
+			{   /*cmd doesnt exists error should be handled*/
 				return (0);
 			}
 		}
 		else
 		{
 			add_path(tokens, env);
-
 			execute(tokens, argv, env);
 			return (0);
 		}
@@ -42,14 +43,12 @@ int chk_cmd(char ***tokens, char **argv, char **env)
 }
 
 /**
- * execute - process id and path execution
- * @argv: argument vectors
- * @tokens: pointer to tokens
- * @env : pointer to env variables
- * Return: 0 on success
- */
-
-
+* execute - process id and path execution
+* @argv: argument vectors
+* @tokens: pointer to tokens
+* @env : pointer to env variables
+* Return: 0 on success
+*/
 int execute(char ***tokens, char *argv[], char *env[])
 {
 	pid_t child_pid;
@@ -71,7 +70,7 @@ int execute(char ***tokens, char *argv[], char *env[])
 			exit(0);
 		}
 		/*TODO handle error, when it returns -1 it means path not found */
-	       /*and will return errno,print errno if path doesnt exist*/
+		/*and will return errno,print errno if path doesnt exist*/
 	}
 	else /*Else block will be executed by parent process*/
 	{

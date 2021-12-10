@@ -1,6 +1,20 @@
 #include "main.h"
 
 /**
+ *_strlen - gets the length of a string
+ *@st: string that will be input to the function
+ *Return: the length of @st
+ */
+int _strlen(char *st)
+{
+	int i = 0;
+
+	for (i = 0; st[i] != '\0'; i++)
+	;
+	return (i);
+}
+
+/**
  * create_path_list - creating singly linked list from path
  * @path: path env value
  * @head: head of list
@@ -8,29 +22,29 @@
  */
 path_node *create_path_list(char *path, path_node **head)
 {
+	int len;
+	path_node *new;
 	char *s = _strdup(path);
-	path_node *new_node, *aux;
 
-	new_node = malloc(sizeof(path_node));
+	if (s == NULL)
+		return (NULL);
 
-	new_node->path = s;
-	new_node->next = NULL;
+	for (len = 0; s[len]; len++)
+	;
 
-	if (*head == NULL)
+	new = malloc(sizeof(path_node));
+
+	if (new == NULL)
+	return (NULL);
+	else
 	{
-		*head = new_node;
-		return (new_node);
+		new->path = s;
+		new->next = *head;
 	}
 
-	aux = *head;
-	while (aux->next)
-	{
-		aux = aux->next;
-	}
-	aux->next = new_node;
+	*head = new;
 
-	free(s);
-	return (*head);
+	return (new);
 }
 
 /**
@@ -41,38 +55,45 @@ path_node *create_path_list(char *path, path_node **head)
  */
 int add_path(char ***tokens, char **env)
 {
-	char *env_path;
-	char *tkn;
-	int i;
-	char *new_cmd;
+	char *env_path, *tkn, *new_cmd = NULL;
+	int len_dir, len_cmd;
 	struct stat st;
-	path_node *path_n = NULL;
+	path_node *path_n, *copy_list;
+
+	st.st_mode = 0;
 
 	env_path = _strdup(_getenv("PATH", env));
 	tkn = strtok(env_path, ":");
-
-	for (i = 0; tkn != NULL; i++)
+	while (tkn != NULL)
 	{
 		create_path_list(tkn, &path_n);
-
 		tkn = strtok(NULL, ":");
 	}
-
-
+	copy_list = path_n;
+	len_cmd = _strlen((*tokens)[0]);
 	while (path_n != NULL)
 	{
-		new_cmd = _strcat(path_n->path, "/");
-		new_cmd = _strcat(new_cmd, **tokens);
-		path_n = path_n->next;
+		len_dir = _strlen(path_n->path);
+		new_cmd = malloc(sizeof(char) * (len_dir + len_cmd + 2));
+		new_cmd[0] = '\0';
+		_strcat(new_cmd, path_n->path);
+		_strcat(new_cmd, "/");
+		_strcat(new_cmd, (*tokens)[0]);
 
 		stat(new_cmd, &st);
-		if ((st.st_mode & S_IFMT) == S_IFREG)
+		if ((access(new_cmd, F_OK | X_OK) == 0) &&
+				((st.st_mode & S_IFMT) == S_IFREG))
 		{
-			**tokens = new_cmd;
+			(*tokens)[0] = new_cmd;
 			return (0);
 		}
+		else /*This part is broken*/
+			perror("Error: ");
+		free(new_cmd);
+		new_cmd = NULL;
+		path_n = path_n->next;
 	}
-	free_list(path_n);
+	free_list(copy_list);
 	return (0);
 }
 

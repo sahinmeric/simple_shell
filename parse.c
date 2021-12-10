@@ -8,24 +8,40 @@
 * @argv: argument vectors
 * Return: nothing
 */
-void _parse(char **buffer, int *token_count, char ***tokens, char ***argv)
-{
-	char *token;
-	int i;
-	const char delim[] = " \t\n";
 
-	*tokens = malloc(sizeof(char *) * (*token_count + 1));
+void _parse(char **buffer, int *token_count, char ***tokens, char ***av)
+{
+	char *tkn, *bff, *token;
+	int i = 0, j = 0;
+	const char delims[] = " \t\n";
+
+	bff = strdup(*buffer);
+
+	tkn = strtok(bff, delims);
+	for (i = 0; tkn != NULL; i++)
+	{
+		tkn = strtok(NULL, delims);
+	}
+
+	*token_count = i;
+
+	*tokens = malloc(sizeof(char *) * (i + 1));
 	if (*tokens == NULL)
 	{
-		printf("Error\n");
+		perror("Error :");
 		return;
 	}
-	token = strtok(*buffer, delim);
-	for (i = 0; token != NULL; i++)
+
+	token = strtok(*buffer, delims);
+	for (j = 0; token != NULL; j++)
 	{
-		(*tokens)[i] = token; /* set tokens[i] to current token*/
-		token = strtok(NULL, delim); /*set current token to next token*/
+	(*tokens)[j] = token;
+	(*av)[j] = token;
+	token = strtok(NULL, delims);
 	}
-	(*tokens)[i] = token; /*set last token to null*/
-	(void) argv;
+
+	(*tokens)[j] = token;
+	(*av)[j] = token;
+
+	free(bff);
 }

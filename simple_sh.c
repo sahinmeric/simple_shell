@@ -48,7 +48,7 @@ int my_shell(char **argv, char **env)
 	char *buffer;
 	int read_status = 0;
 	int token_count;
-	char **tokens;
+	char **tokens, **av;
 
 	signal(SIGINT, sighandler);
 	do {
@@ -59,20 +59,22 @@ int my_shell(char **argv, char **env)
 		write(1, "$", 2);
 
 	/*Read*/
-	read_status = _read(&buffer, &token_count);
+	read_status = _read(&buffer);
 
 	if (read_status == 1)
 		continue;
 
 	/*Parse*/
-	_parse(&buffer, &token_count, &tokens, &argv);
+	_parse(&buffer, &token_count, &tokens, &av);
 
 	/*Check and execute the command*/
-	chk_cmd(&tokens, argv, env);
+	chk_cmd(&tokens, av, env);
 
 	/*Free*/
 	_free(&buffer, &tokens);
 
+	(void) argv;
 	} while (1);
+
 	return (0);
 }
