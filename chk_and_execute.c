@@ -5,16 +5,17 @@
 * @tokens: pointer to tokens.
 * @argv: argument vectors
 * @env: pointer to env variables
+* @buffer: pointer to env variables
 * Return: 0 on success
 */
-int chk_cmd(char ***tokens, char **argv, char **env)
+int chk_cmd(char ***tokens, char **argv, char **env, char **buffer)
 {
 	int status_builtin;
 	char *cmd = *tokens[0];
 	struct stat st;
 
 	/*Check if it is built in*/
-	status_builtin = chk_built_in(tokens, env);
+	status_builtin = chk_built_in(tokens, env, buffer);
 
 	if (status_builtin == 0) /* it means it is not builtin*/
 	{

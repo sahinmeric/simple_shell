@@ -68,7 +68,7 @@ int my_shell(char **argv, char **env)
 	_parse(&buffer, &token_count, &tokens, &av);
 
 	/*Check and execute the command*/
-	chk_cmd(&tokens, av, env);
+	chk_cmd(&tokens, av, env, &buffer);
 
 	/*Free*/
 	_free(&buffer, &tokens);

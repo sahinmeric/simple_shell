@@ -4,30 +4,32 @@
 * _ext - exits the program.
 * @tokens: pointer to the tokens
 * @env: pointer to env variables
+* @buffer: pointer to buffer
 * Return: nothing
 */
-int _ext(char ***tokens, char **env)
+int _ext(char ***tokens, char **env, char **buffer)
 {
-	int status = 0;
 	(void) tokens;
 	(void) env;
-	/*free before exiting*/
-	exit(status);
+	_free(buffer, tokens);
+	exit(98);
 }
 
 /**
 * _cd - change directory to home or given path
 * @tokens: pointer to the tokens
 * @env: pointer to env variables
+* @buffer: buffer
 * Return: 1
 */
-int _cd(char ***tokens, char **env)
+int _cd(char ***tokens, char **env, char **buffer)
 {
 	char *env_home = NULL;
 	char *env_pwd = NULL;
 	int chdir_status;
 
 	(void) tokens;
+	(void) buffer;
 
 	env_home = _getenv("HOME", env);
 	env_pwd = _getenv("PWD", env);
@@ -47,13 +49,15 @@ int _cd(char ***tokens, char **env)
 * _env - print env variables
 * @tokens: pointer to the tokens
 * @env: pointer to env variables
+* @buffer: buffer
 * Return: 0 on success
 */
-int _env(char ***tokens, char **env)
+int _env(char ***tokens, char **env, char **buffer)
 {
 	int i, j;
 
 	(void) tokens;
+	(void) buffer;
 
 	for (i = 0; env[i] != NULL ; i++)
 	{
@@ -69,10 +73,11 @@ int _env(char ***tokens, char **env)
 /**
 * chk_built_in - checks if it is built in, if it is it calls relevant func
 * @tokens: pointer to the tokens
-* @env: pointer to env variables
+* @env: vointer to env variables
+* @buffer: buffer
 * Return: 0 on success
 */
-int chk_built_in(char ***tokens, char **env)
+int chk_built_in(char ***tokens, char **env, char **buffer)
 {
 	int i;
 
@@ -86,7 +91,7 @@ int chk_built_in(char ***tokens, char **env)
 	for (i = 0; list[i].op != NULL; i++)
 	{
 		if (_strcmp((*tokens)[0], list[i].op) == 0)
-		return (list[i].func(tokens, env));
+		return (list[i].func(tokens, env, buffer));
 	}
 
 	return (0);

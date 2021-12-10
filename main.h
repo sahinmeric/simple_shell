@@ -13,15 +13,16 @@ void sighandler(int);
 int my_shell(char **argv, char **env);
 int _read(char **buffer);
 void _parse(char **buffer, int *token_count, char ***tokens, char ***argv);
-int chk_cmd(char ***token, char *argv[], char *env[]);
+int chk_cmd(char ***token, char *argv[], char *env[], char **buffer);
 int execute(char ***token, char *argv[], char *env[]);
-int chk_built_in(char ***tokens, char **env);
+int chk_built_in(char ***tokens, char **env, char **buffer);
 int add_path(char ***tokens, char **env);
 char *_strcat(char *dest, char *src);
 char *_getenv(const char *var_env, char **env);
 int _strcmp(char *s1, char *s2);
 char *_strdup(char *str);
 char *_strcpy(char *dest, char *src);
+void _free(char **buffer, char ***tokens);
 
 /**
  * struct opr - a struct that keeps two types of data, a str and a func pointer
@@ -31,11 +32,11 @@ char *_strcpy(char *dest, char *src);
 typedef struct opr
 {
 	char *op;
-	int (*func)(char ***tokens, char **env);
+	int (*func)(char ***tokens, char **env, char **buffer);
 } opr_t;
 
 /**
- *struct path_node - singly linked list for path
+ *struct path - singly linked list for path
  *@path: string to save each path token
  *@next: next node pointer
  */
