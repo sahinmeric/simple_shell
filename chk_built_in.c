@@ -5,12 +5,13 @@
 * @tokens: pointer to the tokens
 * @env: pointer to env variables
 * @buffer: pointer to buffer
+* @av:args
 * Return: nothing
 */
-int _ext(char ***tokens, char **env, char **buffer)
+int _ext(char ***tokens, char **env, char **buffer, char **av)
 {
-	(void) tokens;
 	(void) env;
+	(void) av;
 	_free(buffer, tokens);
 	exit(98);
 }
@@ -20,9 +21,10 @@ int _ext(char ***tokens, char **env, char **buffer)
 * @tokens: pointer to the tokens
 * @env: pointer to env variables
 * @buffer: buffer
+* @av: argv
 * Return: 1
 */
-int _cd(char ***tokens, char **env, char **buffer)
+int _cd(char ***tokens, char **env, char **buffer, char **av)
 {
 	char *env_home = NULL;
 	char *env_pwd = NULL;
@@ -30,6 +32,7 @@ int _cd(char ***tokens, char **env, char **buffer)
 
 	(void) tokens;
 	(void) buffer;
+	(void) av;
 
 	env_home = _getenv("HOME", env);
 	env_pwd = _getenv("PWD", env);
@@ -40,7 +43,7 @@ int _cd(char ***tokens, char **env, char **buffer)
 		chdir_status = chdir(env_home);
 	}
 	if (_strcmp((*tokens)[1], "-") == 0)
-	chdir_status = chdir(env_pwd);
+		chdir_status = chdir(env_pwd);
 	chdir_status = chdir((*tokens)[1]);
 	return (chdir_status);
 }
@@ -50,14 +53,16 @@ int _cd(char ***tokens, char **env, char **buffer)
 * @tokens: pointer to the tokens
 * @env: pointer to env variables
 * @buffer: buffer
+* @av: argvs
 * Return: 0 on success
 */
-int _env(char ***tokens, char **env, char **buffer)
+int _env(char ***tokens, char **env, char **buffer, char **av)
 {
 	int i, j;
 
 	(void) tokens;
 	(void) buffer;
+	(void) av;
 
 	for (i = 0; env[i] != NULL ; i++)
 	{
@@ -75,9 +80,10 @@ int _env(char ***tokens, char **env, char **buffer)
 * @tokens: pointer to the tokens
 * @env: vointer to env variables
 * @buffer: buffer
+* @av: argv
 * Return: 0 on success
 */
-int chk_built_in(char ***tokens, char **env, char **buffer)
+int chk_built_in(char ***tokens, char **env, char **buffer, char **av)
 {
 	int i;
 
@@ -91,8 +97,7 @@ int chk_built_in(char ***tokens, char **env, char **buffer)
 	for (i = 0; list[i].op != NULL; i++)
 	{
 		if (_strcmp((*tokens)[0], list[i].op) == 0)
-		return (list[i].func(tokens, env, buffer));
+		return (list[i].func(tokens, env, buffer, av));
 	}
-
 	return (0);
 }

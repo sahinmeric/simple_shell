@@ -15,7 +15,7 @@ int _read(char **buffer);
 void _parse(char **buffer, int *token_count, char ***tokens, char ***argv);
 int chk_cmd(char ***token, char *argv[], char *env[], char **buffer);
 int execute(char ***token, char *argv[], char *env[]);
-int chk_built_in(char ***tokens, char **env, char **buffer);
+int chk_built_in(char ***tokens, char **env, char **buffer, char **av);
 int add_path(char ***tokens, char **env);
 char *_strcat(char *dest, char *src);
 char *_getenv(const char *var_env, char **env);
@@ -32,7 +32,7 @@ void _free(char **buffer, char ***tokens);
 typedef struct opr
 {
 	char *op;
-	int (*func)(char ***tokens, char **env, char **buffer);
+	int (*func)(char ***tokens, char **env, char **buffer, char **av);
 } opr_t;
 
 /**

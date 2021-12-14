@@ -56,7 +56,7 @@ int my_shell(char **argv, char **env)
 
 	/*Interactive Shell prompt*/
 	if (isatty(STDIN_FILENO)) /*test if the fildes is connected to the terminal*/
-		write(1, "$", 2);
+		write(1, " $ ", 4);
 
 	/*Read*/
 	read_status = _read(&buffer);

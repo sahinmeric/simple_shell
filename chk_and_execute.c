@@ -3,19 +3,18 @@
 /**
 * chk_cmd - checks the cmd if it is builtin, has path or not and calls execute
 * @tokens: pointer to tokens.
-* @argv: argument vectors
+* @av: argument vectors
 * @env: pointer to env variables
 * @buffer: pointer to env variables
 * Return: 0 on success
 */
-int chk_cmd(char ***tokens, char **argv, char **env, char **buffer)
+int chk_cmd(char ***tokens, char **av, char **env, char **buffer)
 {
 	int status_builtin;
 	char *cmd = *tokens[0];
 	struct stat st;
-
 	/*Check if it is built in*/
-	status_builtin = chk_built_in(tokens, env, buffer);
+	status_builtin = chk_built_in(tokens, env, buffer, av);
 
 	if (status_builtin == 0) /* it means it is not builtin*/
 	{
@@ -25,7 +24,7 @@ int chk_cmd(char ***tokens, char **argv, char **env, char **buffer)
 			stat(cmd, &st);
 			if ((st.st_mode & S_IFMT) == S_IFREG) /*exists*/
 			{
-				execute(tokens, argv, env);
+				execute(tokens, av, env);
 				return (0);
 			}
 			else
@@ -36,7 +35,7 @@ int chk_cmd(char ***tokens, char **argv, char **env, char **buffer)
 		else
 		{
 			add_path(tokens, env);
-			execute(tokens, argv, env);
+			execute(tokens, av, env);
 			return (0);
 		}
 	}
